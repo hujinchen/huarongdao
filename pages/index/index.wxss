@@ -1,0 +1,67 @@
+page {
+    align-items: center;
+}
+
+.container {
+    width: 454rpx;
+    height: 454rpx;
+    border: 20rpx solid #25530a;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    border-radius: 20rpx;
+}
+
+.v1 {
+    width: 150rpx;
+    height: 150rpx;
+    font-size: 50rpx;
+    font-weight: 600;
+    position: relative;
+}
+
+.v1 view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.v2 {
+    width: 150rpx;
+    height: 150rpx;
+    background: #fff;
+}
+
+.v3 {
+    font-size: 32rpx;
+    margin: 20rpx 0;
+}
+
+.v4 {
+    font-size: 32rpx;
+    margin-bottom: 40rpx;
+}
+
+.game {
+    width: 400rpx;
+    height: 80rpx;
+    background: #808a2d;
+    color: #fff;
+    border-radius: 10rpx;
+    font-size: 36rpx;
+}
+
+.reset {
+    width: 400rpx;
+    height: 80rpx;
+    background: #808a2d;
+    color: #fff;
+    border-radius: 10rpx;
+    font-size: 36rpx;
+    margin: 20rpx 0;
+}

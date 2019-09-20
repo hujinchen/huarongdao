@@ -1,0 +1,27 @@
+/**app.wxss**/
+
+page {
+    background: #fff;
+    color: #121212;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.f_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    background: initial;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button::after {
+    border: none;
+}
