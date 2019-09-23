@@ -157,8 +157,8 @@ Page({
                 }
                 [numData[i], numData[x]] = [numData[x], numData[i]];
 
-                // 随机打乱50多次, 判断空格是否在最后一格
-                if (this.count > 50 && numData[numData.length - 1].isEmpty) {
+                // 随机打乱100多次, 判断空格是否在最后一格
+                if (this.count > 100 && numData[numData.length - 1].isEmpty) {
                     this.count = 1;
                     this.setData({ numData });
                     return;
