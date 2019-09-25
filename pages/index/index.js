@@ -118,8 +118,7 @@ Page({
 
     // 初始化题目
     initNum(size) {
-        let nowDifficulty = this.data.nowDifficulty,
-            maxDifficulty = this.data.maxDifficulty;
+        let nowDifficulty = this.data.nowDifficulty, maxDifficulty = this.data.maxDifficulty;
         if (size >= nowDifficulty && size <= maxDifficulty) {
             let numData = [];
             for (let i = 1; i < size * size; i++) {
@@ -134,47 +133,31 @@ Page({
         }
     },
 
-    // 按照移动的方式打乱，题目才能有解，不能随机打乱
-    count: 1,
+    // 随机打乱题目顺序
     disorganize(numData) {
         let nowDifficulty = this.data.nowDifficulty;
+        numData.sort(() => { return (0.5 - Math.random()); }); // 随机打乱顺序
+        while (!numData[numData.length - 1].isEmpty) {
+            numData.sort(() => { return (0.5 - Math.random()); }); // 当前空格在最后一位就退出循环
+        }
+        
+        let num = 0;
         for (let i = 0; i < numData.length; i++) {
-            // 当前是空格的情况，进行随机移动
-            if (numData[i].isEmpty) {
-                let x = -1;
-                // 如果没有移动，就无限循环，直到可以移动为止
-                while (x == -1) {
-                    let direction = this.randomMove();
-                    if (direction == '上' && numData[i - nowDifficulty]) {
-                        x = i - nowDifficulty;
-                    } else if (direction == '下' && numData[i + nowDifficulty]) {
-                        x = i + nowDifficulty;
-                    } else if (direction == '左' && numData[i - 1]) {
-                        x = i - 1;
-                    } else if (direction == '右' && numData[i + 1]) {
-                        x = i + 1;
-                    }
+            for (let x = i + 1; x < numData.length; x++) {
+                // 计算逆序数总的数量
+                if (numData[i].num > numData[x].num) {
+                    num += 1;
                 }
-                [numData[i], numData[x]] = [numData[x], numData[i]];
-
-                // 随机打乱100多次, 判断空格是否在最后一格
-                if (this.count > 100 && numData[numData.length - 1].isEmpty) {
-                    this.count = 1;
-                    this.setData({ numData });
-                    return;
-                }
-                break;
             }
         }
-        this.count++;
-        this.disorganize(numData);
-    },
 
-    // 随机移动的方向
-    randomMove() {
-        let directionArr = ['上', '下', '左', '右'];
-        let num = Math.floor(Math.random() * 4);
-        return directionArr[num];
+        // 逆序数的数量 必须为偶数才有解
+        if (num % 2 == 0) {
+            this.setData({ numData });
+        } else {
+            // 递归调用，直到逆序数的数量为偶数才终止
+            this.disorganize(numData);
+        }
     },
 
     // 定时器
@@ -241,6 +224,9 @@ Page({
     },
 
     onShareAppMessage(e) {
-
+        return {
+            title: '最强大脑 《数字华容道》谁敢来战？',
+            path: 'pages/index/index'
+        }
     }
 })
